@@ -1,27 +1,20 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "client/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "../dist"
-      }
-    }
-  ],
+  "buildCommand": "cd client && npm install && npm run build && cd ../api && npm install",
+  "outputDirectory": "client/dist",
+  "installCommand": "npm install && cd client && npm install && cd ../api && npm install",
   "functions": {
     "api/filter.js": {
       "maxDuration": 30
     }
   },
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
     },
     {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }

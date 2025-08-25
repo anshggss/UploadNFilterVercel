@@ -1,0 +1,6 @@
+{
+  "type": "module",
+  "dependencies": {
+    "exceljs": "^4.4.0"
+  }
+}
