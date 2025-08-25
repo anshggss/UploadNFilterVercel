@@ -1,0 +1,4 @@
+To run the webApp locally :
+
+	- Run the start.bat file
+	- After running, open => http://localhost:5000	

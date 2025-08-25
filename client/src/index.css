@@ -1,0 +1,42 @@
+
+#root {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+body {
+    background-color: white;
+    line-height: 1.6;
+}
+
+/* Common interactive elements */
+button, 
+input[type="button"],
+input[type="submit"] {
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+/* Card-like containers */
+.card {
+    border-radius: 8px;
+    padding: 16px;
+    margin: 8px 0;
+}
+
+/* Links */
+a {
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
