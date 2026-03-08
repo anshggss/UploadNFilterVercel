@@ -24,7 +24,9 @@ function App() {
     formData.append('file', rawFile);
     formData.append('custData', custFile);
     try {
-      const response = await fetch('/api/filter', {
+      // use VITE_API_URL env var when deployed; defaults to relative path in dev
+      const apiUrl = import.meta.env.VITE_API_URL || '/api/filter';
+      const response = await fetch(apiUrl, {
         method: 'POST',
         body: formData,
       });

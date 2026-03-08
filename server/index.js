@@ -5,8 +5,14 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import cors from 'cors';
 
 const app = express();
+
+// allow cross‑origin requests from the client (deploy origin or any)
+app.use(cors({
+  origin: process.env.CLIENT_URL || '*' // set CLIENT_URL when deploying if you want to lock it down
+}));
 
 // Optimized multer configuration with memory storage for better performance
 const upload = multer({ 
@@ -21,7 +27,13 @@ const PORT = process.env.PORT || 5901;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-app.use(express.static(path.join(__dirname, "../client/dist")))
+
+if (process.env.SERVE_STATIC === 'true') {
+  app.use(express.static(path.join(__dirname, "../client/dist")));
+  app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, "../client/index.html"));
+  });
+}
 
 // Add error handling middleware
 app.use((err, req, res, next) => {
@@ -89,9 +101,6 @@ app.post('/api/filter', upload.fields([
   }
 });
 
-app.get("/", (req,res)=>{
-  res.sendFile(path.join(__dirname, "../client/index.html"))
-})
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
